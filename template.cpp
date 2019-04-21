@@ -108,19 +108,78 @@ int mcomb(int n, int m)
     return res;
 }
 
-vector<int> get_gcd(int n){
+vector<int> get_gcd(int n)
+{
     vector<int> res;
-    for(int i=1;i*i<=n;i++){
-        if(n%i==0){
-            if(i*i==n)
-            {res.push_back(i);}
+    for (int i = 1; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            if (i * i == n)
+            {
+                res.push_back(i);
+            }
             else
-            {res.push_back(i);
-            res.push_back(n/i);}
+            {
+                res.push_back(i);
+                res.push_back(n / i);
+            }
         }
     }
     return res;
 }
+
+class UnionFind
+{
+  private:
+    vector<int> id;
+    vector<int> sz;
+
+    int get_id(int x)
+    {
+        while (x != id[x])
+        {
+            x = id[x] = id[id[x]];
+        }
+        return x;
+    }
+
+  public:
+    UnionFind(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            id.push_back(i);
+            sz.push_back(1);
+        }
+    }
+
+    bool connected(int x, int y)
+    {
+        return get_id(x) == get_id(y);
+    }
+
+    void connect(int x, int y)
+    {
+        int xid = get_id(x);
+        int yid = get_id(y);
+        if (sz[xid] < sz[yid])
+        {
+            id[xid] = yid;
+            sz[yid] += sz[xid];
+        }
+        else
+        {
+            id[yid] = xid;
+            sz[xid] += sz[yid];
+        }
+    }
+
+    int get_size(int x)
+    {
+        return sz[get_id(x)];
+    }
+};
 
 signed main()
 {
