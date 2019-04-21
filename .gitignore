@@ -1,3 +1,6 @@
-a.out
+*.out
 *.json
 .vscode
+[!-~]*[!-~].cpp
+!template.cpp
+!.gitignore
