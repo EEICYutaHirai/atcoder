@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -21,7 +23,7 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define INF 1000000007
 
-typedef pair<int, int> pint;
+typedef pair<int, int> Pii;
 typedef long long ll;
 
 #define int ll
@@ -198,5 +200,16 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
-    
+    int A,B;
+    cin >> A >>B;
+    if(A==B){
+        cout << 0 <<endl;
+        return 0;
+    }else if((A+B)%2==0){
+        cout << (A+B)/2<<endl;
+        return 0;
+    }else{
+        cout << "IMPOSSIBLE"<<endl;
+        return 0;
+    }
 }

@@ -23,7 +23,7 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define INF 1000000007
 
-typedef pair<int, int> pint;
+typedef pair<int, int> Pii;
 typedef long long ll;
 
 #define int ll

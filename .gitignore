@@ -2,5 +2,6 @@
 *.json
 .vscode
 [!-~]*[!-~].cpp
+[!-~]*[!-~].*
 !/template.cpp
 !.gitignore

@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -21,7 +23,7 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define INF 1000000007
 
-typedef pair<int, int> pint;
+typedef pair<int, int> Pii;
 typedef long long ll;
 
 #define int ll
@@ -196,7 +198,38 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
     return s[i + h][j + w] - s[i][j + w] + s[i][j] - s[i + h][j];
 }
 
+unsigned getDigit(unsigned num)
+{
+    unsigned digit = 0;
+    while (num != 0)
+    {
+        num /= 10;
+        digit++;
+    }
+    return digit;
+}
+
 signed main()
 {
-    
+    int A, B;
+    cin >> A >> B;
+    B--;
+    int nA = 0, nB = 0;
+    int ketaA = getDigit(A);
+    int ketaB = getDigit(B);
+    int largestA = A / (1 << (ketaA - 1));
+    int largestB = B / (1 << (ketaB - 1));
+    for (int i = 1; i < ketaA; ++i)
+    {
+        nA += (1 << i) * largestA * pow(10, (ketaA - i - 1));
+    }
+    if (largestA == 9)
+    {
+        nA += (1 << ketaA);
+    }
+    else if (largestA >= 4)
+    {
+        nA += (1 << (ketaA - 1));
+    }
+    cout << nA << endl;
 }

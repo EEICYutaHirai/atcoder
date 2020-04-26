@@ -1,5 +1,5 @@
 /*
-プリム法で解く
+昇順に並んでいないもののかずの最大値＝答えになっている。
 */
 
 #include <iostream>
@@ -21,7 +21,7 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define INF 1000000007
 
-typedef pair<int, int> pint;
+typedef pair<int, int> Pii;
 typedef long long ll;
 
 #define int ll
@@ -196,7 +196,99 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
     return s[i + h][j + w] - s[i][j + w] + s[i][j] - s[i + h][j];
 }
 
+vector<int> vData;
+int N;
+
+//index以降でlastよりも大きいかつ昇順に並んでいるものの最大値
+//solve(0, vData[0]) で呼び出す
+int solve(int index, int last)
+{
+    if (index == N - 1)
+        return 1;
+    if (last < vData[index + 1])
+    {
+        return max(solve(index + 1, vData[index + 1]) + 1, solve(index + 1, last));
+    }
+    else
+    {
+        return solve(index + 1, last);
+    }
+}
+
+//n<=16
+/*
 signed main()
 {
-    
+    int N;
+    cin >> N;
+    vector<int> data;
+    rep(i, N)
+    {
+        int tmp;
+        cin >> tmp;
+        data.push_back(tmp);
+    }
+    if (N >= 20)
+    {
+        cout << 0 << endl;
+    }
+    int ans = N;
+    for (int i = 0; i < (1 << N); i++)
+    {
+        int last = INF;
+        int tmp_ans = N;
+        for (int j = 0; j < N; j++)
+        {
+            if (i & (1 << j))
+            {
+                if (last == INF)
+                {
+                    last = data[j];
+                    tmp_ans--;
+                }
+                else if (last < data[j])
+                {
+                    last = data[j];
+                    tmp_ans--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        ans = min(ans, tmp_ans);
+    }
+    cout << ans << endl;
+}
+*/
+
+//n <= 1000
+
+signed main()
+{
+    int N;
+    cin >> N;
+    vector<int> data(N);
+    rep(i, N)
+    {
+        int tmp;
+        cin >> tmp;
+        data[i] = tmp;
+    }
+
+    //index iまでの最大のソートされた列の長さ
+    vector<int> max_length(N, 1);
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j <= i; ++j)
+        {
+            if (data[j] < data[i] && max_length[j] + 1 > max_length[i])
+            {
+                max_length[i] = max_length[j] + 1;
+            }
+        }
+    }
+
+    cout << N - *max_element(max_length.begin(), max_length.end()) << endl;
 }

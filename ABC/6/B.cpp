@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -19,7 +21,7 @@
 using namespace std;
 
 #define rep(i, n) for (int i = 0; i < (n); i++)
-#define INF 1000000007
+#define INF 10007
 
 typedef pair<int, int> pint;
 typedef long long ll;
@@ -198,5 +200,14 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
-    
+    int N;
+    cin >> N;
+
+    vector<int> A;
+    A.push_back(0);
+    A.push_back(0);
+    A.push_back(1);
+    while (A.size() < N)
+        A.push_back((A[A.size() - 1] + A[A.size() - 2] + A[A.size() - 3]) % INF);
+    cout << A[N - 1] << endl;
 }

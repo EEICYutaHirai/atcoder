@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -198,5 +200,18 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
-    
+    int A, B, C, N;
+    cin >> A >> B >> C >> N;
+    int ans = 0;
+    for (int i = 0; i * A <= N; ++i)
+    {
+        for (int j = 0; j * B <= N; ++j)
+        {
+            if ((N - i * A - j * B) % C == 0 && (N - i * A - j * B) >= 0)
+            {
+                ans++;
+            }
+        }
+    }
+    cout << ans << endl;
 }

@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -21,7 +23,7 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define INF 1000000007
 
-typedef pair<int, int> pint;
+typedef pair<int, int> Pii;
 typedef long long ll;
 
 #define int ll
@@ -198,5 +200,53 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
-    
+    int X, Y;
+    int sX, sY, gX, gY;
+    cin >> X >> Y >> sX >> sY >> gX >> gY;
+    string data[X];
+    int ans[X][Y];
+    sX--;
+    sY--;
+    gX--;
+    gY--;
+    rep(i, X)
+    {
+        cin >> data[i];
+    }
+
+    rep(i, X) rep(j, Y) ans[i][j] = INF;
+    ans[sX][sY] = 0;
+    int dx[4] = {-1, 1, 0, 0};
+    int dy[4] = {0, 0, -1, 1};
+
+    vector<Pii> last_update;
+    last_update.push_back(Pii(sX, sY));
+    while (true)
+    {
+        vector<Pii> tmp_last_update;
+        for (int i = 0; i < last_update.size(); ++i)
+        {
+            int x = last_update[i].first;
+                int y = last_update[i].second;
+                int count = ans[x][y];
+            for (int j = 0; j < 4; ++j)
+            {
+                
+                if (x + dx[j] >= 0 && x + dx[j] < X && y + dy[j] >= 0 && y + dy[j] < Y && data[x + dx[j]][y + dy[j]]=='.')
+                {
+                    if (ans[x + dx[j]][y + dy[j]]>count+1)
+                    {
+                        ans[x + dx[j]][y + dy[j]] = count + 1;
+                        tmp_last_update.push_back(Pii(x + dx[j],y + dy[j]));
+                    }
+                }
+            }
+            
+        }
+        if(ans[gX][gY]!=INF){
+                cout << ans[gX][gY]<<endl;
+                return 0;
+            }
+            last_update = tmp_last_update;
+    }
 }

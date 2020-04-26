@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -198,5 +200,25 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
-    
+    //x+y+z=N
+    //2x+3y+4z=M
+    // (1 0 -1) = (3N-M)
+    // (0 1 2) = (M-2N)
+    //(x)   (3N-M)     (1)
+    //(y) = (M-2N) + z (-2)
+    //(z)   (0)        (1)
+    // 0<=z<=N
+    //  3N-M<=x<=4N-M
+    //  M-4N<=y<=M-2N
+    int N, M;
+    cin >> N >> M;
+    for(int z=0;z<=N;z++){
+        int x = 3*N-M+z;
+        int y = M-2*N-2*z;
+        if(x >= 0 && y>= 0){
+            cout << x<<" "<<y<<" "<<z<<endl;
+            return 0;
+        }
+    }
+    cout << "-1 -1 -1"<<endl;
 }

@@ -1,5 +1,7 @@
 /*
-プリム法で解く
+title:
+
+url:
 */
 
 #include <iostream>
@@ -198,5 +200,16 @@ int sum(const std::vector<std::vector<T>> &s, int i, int j, int h, int w)
 
 signed main()
 {
+    //戦闘がB
+    //最後尾がA
+    int N;
+    vector<string> ss;
+    cin >> N;
+    rep(i, N)
+    {
+        string tmp;
+        cin >> tmp;
+        ss.push_back(tmp);
+    }
     
 }
